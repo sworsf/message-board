@@ -1,0 +1,29 @@
+/* egg-theme.css */
+body {
+    font-family: 'Comic Sans MS', cursive, sans-serif; /* Example font */
+    background-color: #FFF8E7; /* Light eggshell color */
+    color: #806517; /* Yolk color */
+}
+
+button, .button {
+    background-color: #F0E68C; /* Light yolk color */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 20px; /* Egg-shaped buttons */
+    box-shadow: 0 4px #999;
+}
+
+button:hover, .button:hover { background-color: #E6DB74 }
+
+button:active, .button:active {
+    background-color: #E6DB74;
+    box-shadow: 0 2px #666;
+    transform: translateY(2px);
+}
