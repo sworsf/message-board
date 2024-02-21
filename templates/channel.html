@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <title>Channel {{ channel.name }}</title>
 </head>
+<link rel="stylesheet" href="static/style.css">
 <body>
+<div class="tenor-gif-embed" data-postid="13160200" data-share-method="host" data-aspect-ratio="1" data-width="100%"><a href="https://tenor.com/view/fried-egg-sunny-side-up-egg-gif-13160200">Fried Egg Sunny Side Up GIF</a>from <a href="https://tenor.com/search/fried+egg-gifs">Fried Egg GIFs</a></div> <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
 <p>The distributed messenger. <a href="{{ url_for('home_page') }}">List of channels.</a> </p>
 {% if channel %}
     <h1>Channel {{ channel.name }}</h1>
@@ -22,7 +24,8 @@
     <input type="hidden" name="channel" value="{{ channel.endpoint | urlencode }}">
     Sender: <input type="text" name="sender" id="sender"> <br>
     Message: <input type="text" name="content" id="content"> <br>
-    <input type="submit" value="Post">
+    <input type="submit" value="Post" class="button">
+
 </form>
 
 </body>
