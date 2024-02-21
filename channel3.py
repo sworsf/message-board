@@ -4,6 +4,7 @@ import json
 import requests
 import re
 
+
 # Class-based application configuration
 class ConfigClass(object):
     """ Flask application config """
@@ -25,6 +26,7 @@ CHANNEL_FILE = 'messages.json'
 
 @app.cli.command('register')
 def register_command():
+    """Register this channel with the hub."""
     response = requests.post(HUB_URL + '/channels', headers={'Authorization': 'authkey ' + HUB_AUTHKEY},
                              data=json.dumps({
                                  "name": CHANNEL_NAME,
@@ -52,8 +54,9 @@ def health_check():
     if not check_authorization(request):
         return "Invalid authorization", 400
     return jsonify({'name':CHANNEL_NAME}),  200
-    
 def eliza_response(message):
+    """Generate whimsical, egg-themed responses based on keywords in the user's message."""
+    # Categorized egg puns, facts, and jokes based on potential keywords
     EGG_CONTENT = {
         'why': [
             "Why did the chicken go to the séance? To talk to the other side!",
@@ -100,10 +103,13 @@ def eliza_response(message):
         ]
     }
 
+    # Find the first keyword in the message that matches a category, if any
     for keyword in EGG_CONTENT.keys():
         if re.search(r'\b' + keyword + r'\b', message, re.IGNORECASE):
+            # Select a random response from the matching category
             return random.choice(EGG_CONTENT[keyword])
 
+    # If no keywords match, select a random response from the 'default' category
     return random.choice(EGG_CONTENT['default'])
 
 
@@ -118,10 +124,12 @@ def home_page():
         if not message or 'content' not in message or 'sender' not in message or 'timestamp' not in message:
             return "Invalid message format", 400
 
+        # Save user's message
         messages = read_messages()
         messages.append(message)
         save_messages(messages)
 
+        # Generate and save bot's reply
         bot_reply = {'content': eliza_response(message['content']), 'sender': 'EGGLIZA', 'timestamp': message['timestamp']}
         messages.append(bot_reply)
         save_messages(messages)
@@ -143,6 +151,10 @@ def save_messages(messages):
     with open(CHANNEL_FILE, 'w') as file:
         json.dump(messages, file)
 
+
+
+if __name__ == '__main__':
+    app.run(port=5003, debug=True)
 
 
 if __name__ == '__main__':
