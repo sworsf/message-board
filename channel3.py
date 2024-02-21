@@ -54,8 +54,9 @@ def health_check():
     if not check_authorization(request):
         return "Invalid authorization", 400
     return jsonify({'name':CHANNEL_NAME}),  200
+    
 def eliza_response(message):
-    """Generate whimsical, egg-themed responses based on keywords in the user's message."""
+    # Eliza-based Chatbot focused on eggs
     # Categorized egg puns, facts, and jokes based on potential keywords
     EGG_CONTENT = {
         'why': [
